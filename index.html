@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        display: grid;
+        /* background-color: rgba(0, 0, 0, .5); */
+        grid-template-columns: repeat(4, 2rem);
+        grid-template-rows: repeat(4, 2rem);
+        /* gap: .125rem; */
+        padding: .125rem;
+        width: fit-content;
+        margin: 2rem auto;
+      }
+      .box {
+        background-color: #fff;
+      }
+      .fill {
+        /* background-color: #eaeaea; */
+        transition: background-color 0.5s ease;
+      }
+      .fill.black {
+        background-color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box box-1"></div>
+      <div class="box box-2 fill" data-order="1"></div>
+      <div class="box box-3 fill" data-order="2"></div>
+      <div class="box box-4"></div>
+      <div class="box box-5 fill" data-order="8"></div>
+      <div class="box box-6"></div>
+      <div class="box box-7"></div>
+      <div class="box box-8 fill" data-order="3"></div>
+      <div class="box box-9 fill" data-order="7"></div>
+      <div class="box box-10"></div>
+      <div class="box box-11"></div>
+      <div class="box box-12 fill" data-order="4"></div>
+      <div class="box box-13"></div>
+      <div class="box box-14 fill" data-order="6"></div>
+      <div class="box box-15 fill" data-order="5"></div>
+      <div class="box box-16"></div>
+    </div>
+    <script>
+      const fills = [];
+      for (let num = 1; num <= 8; num++) {
+        const element = document.querySelector(`[data-order="${num}"]`);
+        if (element) {
+          fills.push(element);
+        }
+      }
+      const delayBetweenElements = 200; // Adjust the delay between each element
+      const activeDuration = 400; // Adjust the duration each element remains active
+      const intervalDuration = 1600; // Adjust the interval duration for the entire cycle
+      fills.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add("black");
+          setTimeout(() => {
+            el.classList.remove("black");
+          }, activeDuration);
+        }, delayBetweenElements * i);
+      });
+      setInterval(() => {
+        fills.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add("black");
+            setTimeout(() => {
+              el.classList.remove("black");
+            }, activeDuration);
+          }, delayBetweenElements * i);
+        });
+      }, intervalDuration);
+    </script>
+  </body>
+</html>
